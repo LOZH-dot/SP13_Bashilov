@@ -8,9 +8,6 @@ namespace Ex1_Forms
 {
     class Hyperbola : Function
     {
-        private double a = 0, b = 0;
-       
-
         public Hyperbola(double a, double b)
         {
             this.a = a;

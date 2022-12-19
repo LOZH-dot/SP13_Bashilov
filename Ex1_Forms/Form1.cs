@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Ex1_Forms
@@ -15,6 +16,39 @@ namespace Ex1_Forms
 
         private void ResultButton_Click(object sender, EventArgs e)
         {
+            using (StreamWriter sw = new StreamWriter("data.txt"))
+            {
+                foreach (var item in func)
+                    sw.WriteLine($"{item.name}:{item.a}:{item.b}:{item.c}");
+            }
+
+            func.Clear();
+
+            using (StreamReader sr = new StreamReader("data.txt"))
+            {
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] strs = line.Split(':');
+
+                    switch (strs[0])
+                    {
+                        case "Прямая":
+                            func.Add(new Line(double.Parse(strs[1]), double.Parse(strs[2])));
+                            break;
+                        case "Парабола":
+                            func.Add(new Kub(double.Parse(strs[1]), double.Parse(strs[2]), double.Parse(strs[3])));
+                            break;
+                        case "Гипербола":
+                            func.Add(new Hyperbola(double.Parse(strs[1]), double.Parse(strs[2])));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
             double x = 0;
 
             try

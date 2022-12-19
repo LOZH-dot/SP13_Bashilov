@@ -2,8 +2,6 @@
 {
     class Kub : Function
     {
-        private double a = 0, b = 0, c = 0;
-
         public Kub(double a, double b, double c)
         {
             this.a = a;
